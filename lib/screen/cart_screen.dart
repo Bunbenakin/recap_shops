@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
-import 'package:recap_shops/providers/cart.dart' show Cart;
+import 'package:recap_shops/providers/cart.dart'
+    show Cart; //it wont show cartitem class but just cart class
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -14,6 +15,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartprov = Provider.of<Cart>(context);
+    final Ordprov = Provider.of<Orders>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -37,14 +39,13 @@ class CartScreen extends StatelessWidget {
                   //   width: 10,
                   // ),
                   Chip(
-                    label: Text('\$${cartprov.totalamount.toString()}'),
+                    label: Text('\$${cartprov.totalamount.toStringAsFixed(2)}'),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   Spacer(),
                   ElevatedButton(
                       onPressed: (() {
-                        Provider.of<Orders>(context, listen: false).addorder(
-                            cartprov.cartitemss.values.toList(),
+                        Ordprov.addorder(cartprov.cartitemss.values.toList(),
                             cartprov.totalamount);
                         cartprov
                             .clear(); // this clear the cart page after pressing order
@@ -60,9 +61,13 @@ class CartScreen extends StatelessWidget {
           Expanded(
               child: ListView.builder(
             itemBuilder: (ctx, i) => CartItem(
-              cartprov.cartitemss.values.toList()[i].id,
+              cartprov.cartitemss.values
+                  .toList()[i]
+                  .id, // we add values to show us what is on that map and only work on the concretes value stored in the map
               cartprov.cartitemss.keys.toList()[i],
-              cartprov.cartitemss.values.toList()[i].price,
+              cartprov.cartitemss.values
+                  .toList()[i]
+                  .price, //this enables that our valusr shows on cartscreen
               cartprov.cartitemss.values.toList()[i].quantity,
               cartprov.cartitemss.values.toList()[i].title,
             ),

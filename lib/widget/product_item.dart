@@ -49,7 +49,21 @@ class ProductItem extends StatelessWidget {
             Icons.shopping_cart,
           ),
           onPressed: () {
-            cart.addItem(product.id, product.price, product.title);
+            cart.addItem(product.id ?? '', product.price, product.title);
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Added Item to cart'),
+                duration: Duration(microseconds: 10),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  onPressed: () {
+                    cart.removeSingleItem(product.id ??
+                        ''); // since our id is acting up we put ? in our id class in product file and in other refrence where we call out id ?? ''
+                  },
+                ),
+              ),
+            );
           },
           color: Theme.of(context).accentColor,
         ),

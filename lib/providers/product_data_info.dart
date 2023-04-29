@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recap_shops/providers/cart.dart';
 import '../providers/product.dart';
 
 class ProductDataInfo with ChangeNotifier {
@@ -47,12 +48,32 @@ class ProductDataInfo with ChangeNotifier {
   }
 
   Product findById(String id) {
-    return _items
-        .firstWhere((prod) => prod.id == id); //findbyID is a method named by me
+    return _items.firstWhere((prod) =>
+        prod.id ==
+        id); //findbyID is a method named by me //((prod) reurn true if the id of the product iam looking for is equal to the ProductId take note product Id is in findbyID(ProductId) in product detail screen)
   }
 
-  void addProduct() {
+  void addProduct(Product product) {
+    final newProduct = Product(
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+        id: DateTime.now().toString());
+    _items.add(newProduct);
+    //  _items.insert(0, newProduct);
+
     notifyListeners();
+  }
+
+  void updateProduct(String id, Product newproduct) {
+    final _proIndex = _items.indexWhere((prod) => prod.id == id);
+    if (_proIndex >= 0) {
+      _items[_proIndex] = newproduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
   }
 
   Product findbyId2(String id) {

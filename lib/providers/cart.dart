@@ -34,6 +34,7 @@ class Cart with ChangeNotifier {
   }
 
   void addItem(String productId, double price, String title) {
+    // we did not add quantity because quantity willbe added one at a time
     if (_cartitemss.containsKey(productId)) {
       _cartitemss.update(
         productId,
@@ -57,6 +58,7 @@ class Cart with ChangeNotifier {
   }
 
   void removeSingleItem(String productId) {
+    //this is used to undo for snack bar
     if (!_cartitemss.containsKey(productId)) {
       return;
     }

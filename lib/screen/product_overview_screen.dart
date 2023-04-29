@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Badge;
 import 'package:recap_shops/providers/cart.dart';
 import 'package:recap_shops/screen/cart_screen.dart';
+import 'package:recap_shops/widget/app_drawer.dart';
 import '../providers/product.dart';
 import '../widget/product_item.dart';
 import '../providers/cart.dart';
@@ -32,6 +33,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
             onSelected: (FilterOptions selectedValue) {
               setState(() {
                 if (selectedValue == FilterOptions.Favourites) {
+                  //this is the deciding factor the .all and .favourites
                   _showOnlyfavourite = true;
                 } else {
                   _showOnlyfavourite = false;
@@ -43,7 +45,10 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
               PopupMenuItem(
                   child: Text('Only Favourites'),
                   value: FilterOptions.Favourites),
-              PopupMenuItem(child: Text('show all'), value: FilterOptions.all),
+              PopupMenuItem(
+                child: Text('show all'),
+                value: FilterOptions.all,
+              ),
             ],
           ),
           Consumer<Cart>(
@@ -57,6 +62,7 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
                   ))
         ],
       ),
+      drawer: AppDrawer(),
       body: ProductsGrid(_showOnlyfavourite),
     );
   }

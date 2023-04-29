@@ -1,6 +1,9 @@
 import 'package:recap_shops/providers/cart.dart';
 import 'package:recap_shops/providers/orders.dart';
+import 'package:recap_shops/screen/Edit_product_screen.dart';
 import 'package:recap_shops/screen/cart_screen.dart';
+import 'package:recap_shops/screen/manage_product_screen.dart';
+import 'package:recap_shops/screen/order_screen.dart';
 import 'package:recap_shops/screen/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/product_data_info.dart';
@@ -37,6 +40,9 @@ class MyApp extends StatelessWidget {
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
           CartScreen.routeName: (ctx) => CartScreen(),
+          OrderScreen.routeName: (ctx) => OrderScreen(),
+          ManageProduct.routeName: (ctx) => ManageProduct(),
+          EditProductScreen.routeName: (ctx) => EditProductScreen(),
         },
       ),
     );

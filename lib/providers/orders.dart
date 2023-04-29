@@ -3,7 +3,7 @@ import 'package:recap_shops/providers/cart.dart';
 
 class OrderItem with ChangeNotifier {
   final String Id;
-  final double amount;
+  final double amount; //this is for total amount
   final List<CartItem> product;
   final DateTime dateTime;
 

@@ -11,10 +11,13 @@ class ProductsGrid extends StatelessWidget {
   ProductsGrid(this.showfavs);
   @override
   Widget build(BuildContext context) {
-    final productsData = Provider.of<ProductDataInfo>(context);
-    final products = showfavs
-        ? productsData.ShowFavourites
-        : productsData.items; //this get us the list of product with .items
+    final productsData = Provider.of<ProductDataInfo>(
+        context); //this gives us access to products object and this is not our list of product
+    final products =
+        showfavs //if showfavs is true show the slected favourites if not  show the product which is product,items
+            ? productsData.ShowFavourites //check the
+            : productsData
+                .items; //this get us the list of product with .items remember List<Product> get _items = []; List<Product> get items {return [..._items];}
 
     return GridView.builder(
         padding: const EdgeInsets.all(10.0),

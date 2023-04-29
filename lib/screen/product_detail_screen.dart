@@ -12,7 +12,8 @@ class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
   @override
   Widget build(BuildContext context) {
-    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final productId =
+        ModalRoute.of(context)!.settings.arguments as String; //is the Id
     final loadedProduct =
         Provider.of<ProductDataInfo>(context).findById(productId);
 
